@@ -19,6 +19,7 @@ const validationSchema = yup.object().shape({
         .max(11, "Phone number must be less than 11 characters")
         .required("Phone number is required"),
       age: yup.number()
+        .positive("Age must be greater than 0")
     })
   )
 });
@@ -95,6 +96,37 @@ function App() {
                                   className="invalid-feedback d-block"
                                 />
                               </div>
+                              <div className="form-group">
+                                <input 
+                                  type="checkbox"
+                                  onClick={() => {
+                                    const ageCheckbox = document.querySelector(`#age-checkbox-${index}`);
+                                    const ageInput = document.querySelector(`#age-input-${index}`);
+                                    if (ageCheckbox.checked) {
+                                      ageInput.className = "form-control d-block";
+                                    } else {
+                                      ageInput.className = "form-control d-none";
+                                      ageInput.value = "";
+                                      values.friends[index].age = "";
+                                    }
+                                  }}
+                                  id={`age-checkbox-${index}`}
+                                />
+                                <label style={{marginLeft: '5px'}}>Age</label>
+                                <Field
+                                  name={`friends[${index}].age`}
+                                  type="text"
+                                  value={friend.age || ""}
+                                  onChange={handleChange}
+                                  className="form-control d-none"
+                                  id={`age-input-${index}`}
+                                />
+                                <ErrorMessage
+                                  name={`friends[${index}].age`}
+                                  component="div"
+                                  className="invalid-feedback d-block"
+                                />
+                              </div>
                               <div className="form-group clearfix">
                                 <button
                                   className="btn btn-danger mr-2 float-right"
@@ -110,7 +142,12 @@ function App() {
                         <button
                           className="btn btn-primary mr-2"
                           type="button"
-                          onClick={() => push('')}
+                          onClick={() => push({
+                            name: "",
+                            email: "",
+                            phoneNumber: "",
+                            age: ""
+                          })}
                         >
                           Add
                         </button>
