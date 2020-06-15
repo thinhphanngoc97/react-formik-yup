@@ -39,85 +39,70 @@ function App() {
           }
         }}
       >
-        {({ errors, touched, values, handleChange }) => (
+        {({ errors, values, handleChange }) => (
           <Form>
             <div className="container">
               <div className="row">
-                <div className="col-6">
+                <div className="col-5">
                   <FieldArray name="friends">
                     {({ push, remove }) => (
                       <div>
                         {values.friends.map((friend, index) => {
                           return (
                             <div key={index}>
-                              <div className="row">
-                                <div className="col-10">
-                                  <div className="form-group">
-                                    <label htmlFor="name">Name</label>
-                                    <Field
-                                      name={`friends[${index}].name`}
-                                      type="name"
-                                      value={friend.name}
-                                      onChange={handleChange}
-                                      className={
-                                        "form-control" +
-                                        (errors.name && touched.name ? " is-invalid" : "")
-                                      }
-                                    />
-                                    <ErrorMessage
-                                      name={`friends[${index}].name`}
-                                      component="div"
-                                      className="invalid-feedback"
-                                    />
-                                  </div>
-                                  <div className="form-group">
-                                    <label htmlFor="name">Email</label>
-                                    <Field
-                                      name={`friends[${index}].email`}
-                                      type="email"
-                                      value={friend.email}
-                                      onChange={handleChange}
-                                      className={
-                                        "form-control" +
-                                        (errors.email && touched.email ? " is-invalid" : "")
-                                      }
-                                    />
-                                    <ErrorMessage
-                                      name={`friends[${index}].email`}
-                                      component="div"
-                                      className="invalid-feedback"
-                                    />
-                                  </div>
-                                  <div className="form-group">
-                                    <label htmlFor="name">Phone Number</label>
-                                    <Field
-                                      name={`friends[${index}].phoneNumber`}
-                                      type="tel"
-                                      value={friend.phoneNumber}
-                                      onChange={handleChange}
-                                      className={
-                                        "form-control" +
-                                        (errors.phoneNumber && touched.phoneNumber ? " is-invalid" : "")
-                                      }
-                                    />
-                                    <ErrorMessage
-                                      name={`friends[${index}].phoneNumber`}
-                                      component="div"
-                                      className="invalid-feedback"
-                                    />
-                                  </div>
-                                </div>
-                                <div className="col-2">
-                                  <div className="form-group">
-                                    <button
-                                      className="btn btn-danger mr-2"
-                                      type="button"
-                                      onClick={() => remove(index)}
-                                    >
-                                      Remove
-                                    </button>
-                                  </div>
-                                </div>
+                              <div className="form-group">
+                                <label htmlFor="name">Name</label>
+                                <Field
+                                  name={`friends[${index}].name`}
+                                  type="text"
+                                  value={friend.name || ""}
+                                  onChange={handleChange}
+                                  className="form-control"
+                                />
+                                <ErrorMessage
+                                  name={`friends[${index}].name`}
+                                  component="div"
+                                  className="invalid-feedback d-block"
+                                />
+                              </div>
+                              <div className="form-group">
+                                <label htmlFor="name">Email</label>
+                                <Field
+                                  name={`friends[${index}].email`}
+                                  type="text"
+                                  value={friend.email || ""}
+                                  onChange={handleChange}
+                                  className="form-control"
+                                />
+                                <ErrorMessage
+                                  name={`friends[${index}].email`}
+                                  component="div"
+                                  className="invalid-feedback d-block"
+                                />
+                              </div>
+                              <div className="form-group">
+                                <label htmlFor="name">Phone Number</label>
+                                <Field
+                                  name={`friends[${index}].phoneNumber`}
+                                  type="text"
+                                  value={friend.phoneNumber || ""}
+                                  onChange={handleChange}
+                                  className="form-control"
+                                />
+                                <ErrorMessage
+                                  name={`friends[${index}].phoneNumber`}
+                                  component="div"
+                                  className="invalid-feedback d-block"
+                                />
+                              </div>
+                              <div className="form-group clearfix">
+                                <button
+                                  className="btn btn-danger mr-2 float-right"
+                                  type="button"
+                                  onClick={() => remove(index)}
+                                >
+                                  Remove
+                                </button>
                               </div>
                             </div>
                           )
@@ -125,12 +110,7 @@ function App() {
                         <button
                           className="btn btn-primary mr-2"
                           type="button"
-                          onClick={() => push({
-                            name: "",
-                            email: "",
-                            phoneNumber: "",
-                            age: "",
-                          })}
+                          onClick={() => push('')}
                         >
                           Add
                         </button>
@@ -138,7 +118,7 @@ function App() {
                     )}
                   </FieldArray>
                 </div>
-                <div className="col-6">
+                <div className="col-7">
                   <div>
                     <button type="submit" className="btn btn-warning mr-2">Submit</button>
                   </div>
